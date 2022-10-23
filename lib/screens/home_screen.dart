@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/destination_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -71,6 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 _buildIcon(3),
               ],
             ),
+            const SizedBox(height: 20),
+            const DestinationCarousel(),
           ],
         ),
       ),
