@@ -12,7 +12,7 @@ class Hotel {
       });
 }
 
-final List<Hotel> hotels = [
+ List<Hotel> hotels = [
   Hotel(
       imageUrl: 'assets/images/hotel0.jpeg',
       name: 'Hotel 0',

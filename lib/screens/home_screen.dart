@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/destination_carousel.dart';
+import '../widgets/hotel_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   int _selectedIndex = 0;
+  int _currentTab = 0;
   List<IconData> _icons = [
     FontAwesomeIcons.plane,
     FontAwesomeIcons.bed,
@@ -74,8 +76,41 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 20),
             const DestinationCarousel(),
+            const SizedBox(height: 20),
+            const HotelCarousel(),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentTab,
+        onTap: (int value) {
+          setState(() {
+            _currentTab = value;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                size: 30,
+              ),
+            title: SizedBox.shrink(),
+          ),
+              BottomNavigationBarItem(
+              icon: Icon(
+                Icons.local_pizza,
+                size: 30,
+             ),
+                title: SizedBox.shrink(),
+              ),
+          BottomNavigationBarItem(
+            icon: CircleAvatar(
+              radius: 15,
+              backgroundImage: NetworkImage('http://i.imgur.com/zL4Krbz.jpg'),
+            ),
+            title: SizedBox.shrink(),
+            ),
+        ],
       ),
     );
   }
