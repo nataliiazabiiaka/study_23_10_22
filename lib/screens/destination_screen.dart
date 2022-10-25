@@ -13,6 +13,16 @@ class DestinationScreen extends StatefulWidget {
 }
 
 class _DestinationScreenState extends State<DestinationScreen> {
+
+  Text _buildRatingStars(int rating) {
+    String stars = '';
+    for (int i = 0; i < rating; i++) {
+      stars += '';
+    }
+    stars.trim();
+    return Text(stars);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,6 +135,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
           ),
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.only(top: 10, bottom: 15),
               itemCount: widget.destination.activities.length,
                 itemBuilder: (BuildContext context, int index) {
                 Activity activity = widget.destination.activities[index];
@@ -137,6 +148,100 @@ class _DestinationScreenState extends State<DestinationScreen> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(100, 20, 20, 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 120,
+                                  child: Text(
+                                      activity.name,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                        '\$${activity.price}',
+                                    style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    ),
+                                    const Text(
+                                      'per pax',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Text(
+                                activity.type,
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            _buildRatingStars(activity.rating),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(5),
+                                  width: 70,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                  alignment: Alignment.center,
+                                  child: Text(activity.startTimes[0]),
+                                ),
+                                const SizedBox(width: 10),
+                                Container(
+                                  padding: const EdgeInsets.all(5),
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.secondary,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                      activity.startTimes[1],
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 20,
+                      top: 15,
+                      bottom: 15,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image(
+                          width: 110,
+                          image: AssetImage(
+                              activity.imageUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     )
                   ],
