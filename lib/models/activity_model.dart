@@ -13,5 +13,5 @@ class Activity {
     required this.startTimes,
     required this.rating,
     required this.price,
-});
+  });
 }

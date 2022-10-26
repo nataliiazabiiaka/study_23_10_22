@@ -4,31 +4,31 @@ class Hotel {
   String address;
   int price;
 
-  Hotel(
-      {required this.imageUrl,
-      required this.name,
-      required this.address,
-      required this.price,
-      });
+  Hotel({
+    required this.imageUrl,
+    required this.name,
+    required this.address,
+    required this.price,
+  });
 }
 
- List<Hotel> hotels = [
+List<Hotel> hotels = [
   Hotel(
-      imageUrl: 'assets/images/hotel0.jpeg',
-      name: 'Hotel 0',
-      address: '404 Great Str',
-      price: 175,
+    imageUrl: 'assets/images/hotel0.jpeg',
+    name: 'Hotel 0',
+    address: '404 Great Str',
+    price: 175,
   ),
   Hotel(
-      imageUrl: 'assets/images/hotel1.jpeg',
-      name: 'Hotel 1',
-      address: '404 Great Str',
-      price: 300,
+    imageUrl: 'assets/images/hotel1.jpeg',
+    name: 'Hotel 1',
+    address: '404 Great Str',
+    price: 300,
   ),
   Hotel(
-      imageUrl: 'assets/images/hotel2.jpeg',
-      name: 'Hotel 2',
-      address: '404 Great Str',
-      price: 240,
+    imageUrl: 'assets/images/hotel2.jpeg',
+    name: 'Hotel 2',
+    address: '404 Great Str',
+    price: 240,
   ),
 ];

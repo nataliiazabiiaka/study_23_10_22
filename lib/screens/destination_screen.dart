@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import '../models/destination_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../models/activity_model.dart';
+import '../models/destination_model.dart';
 
 class DestinationScreen extends StatefulWidget {
-
   final Destination destination;
 
-  const DestinationScreen({Key? key, required this.destination}) : super(key: key);
+  const DestinationScreen({Key? key, required this.destination})
+      : super(key: key);
 
   @override
-  _DestinationScreenState createState() => _DestinationScreenState();
+  State<DestinationScreen> createState() => _DestinationScreenState();
 }
 
 class _DestinationScreenState extends State<DestinationScreen> {
-
   Text _buildRatingStars(int rating) {
     String stars = '';
     for (int i = 0; i < rating; i++) {
-      stars += '';
+      stars += '\u2605';
     }
     stars.trim();
-    return Text(stars);
+    return Text(
+      stars,
+      style: const TextStyle(color: Colors.yellow),
+    );
   }
 
   @override
@@ -48,7 +52,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                     borderRadius: BorderRadius.circular(30),
                     child: Image(
                       image: AssetImage(
-                          widget.destination.imageUrl,
+                        widget.destination.imageUrl,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -57,16 +61,17 @@ class _DestinationScreenState extends State<DestinationScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 40),
+                  horizontal: 10,
+                  vertical: 40,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back),
-                    iconSize: 30,
-                        color: Colors.black,
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back),
+                      iconSize: 30,
+                      color: Colors.black,
                     ),
                     Row(
                       children: [
@@ -78,7 +83,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                         ),
                         IconButton(
                           onPressed: () => Navigator.pop(context),
-                          icon: Icon(FontAwesomeIcons.sortAmountDown),
+                          icon: const Icon(FontAwesomeIcons.arrowDownWideShort),
                           iconSize: 25,
                           color: Colors.black,
                         ),
@@ -104,7 +109,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           FontAwesomeIcons.locationArrow,
                           color: Colors.white70,
                           size: 15,
@@ -123,28 +128,28 @@ class _DestinationScreenState extends State<DestinationScreen> {
                 ),
               ),
               const Positioned(
-                  right: 20,
-                  bottom: 20,
-                  child: Icon(
-                      Icons.location_on,
-                    color: Colors.white70,
-                      size: 25,
-                  ),
+                right: 20,
+                bottom: 20,
+                child: Icon(
+                  Icons.location_on,
+                  color: Colors.white70,
+                  size: 25,
+                ),
               )
             ],
           ),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.only(top: 10, bottom: 15),
+              padding: const EdgeInsets.only(top: 10, bottom: 15),
               itemCount: widget.destination.activities.length,
-                itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (BuildContext context, int index) {
                 Activity activity = widget.destination.activities[index];
                 return Stack(
                   children: [
                     Container(
                       margin: const EdgeInsets.fromLTRB(40, 5, 20, 5),
                       height: 170,
-                        width: double.infinity,
+                      width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -159,14 +164,14 @@ class _DestinationScreenState extends State<DestinationScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 120,
                                   child: Text(
-                                      activity.name,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                    activity.name,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                   ),
@@ -174,11 +179,11 @@ class _DestinationScreenState extends State<DestinationScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                        '\$${activity.price}',
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                      '\$${activity.price}',
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                     const Text(
                                       'per pax',
@@ -191,36 +196,46 @@ class _DestinationScreenState extends State<DestinationScreen> {
                               ],
                             ),
                             Text(
-                                activity.type,
-                                style: const TextStyle(
-                                  color: Colors.grey,
-                                ),
+                              activity.type,
+                              style: const TextStyle(
+                                color: Colors.grey,
                               ),
+                            ),
                             _buildRatingStars(activity.rating),
                             const SizedBox(height: 10),
                             Row(
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.all(5),
-                                  width: 70,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.secondary,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                  alignment: Alignment.center,
-                                  child: Text(activity.startTimes[0]),
+                                ConstrainedBox(
+                                  constraints:
+                                      const BoxConstraints(minWidth: 70),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(activity.startTimes[0]),
+                                  ),
                                 ),
                                 const SizedBox(width: 10),
-                                Container(
-                                  padding: const EdgeInsets.all(5),
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Text(
+                                ConstrainedBox(
+                                  constraints:
+                                      const BoxConstraints(minWidth: 70),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
                                       activity.startTimes[1],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -238,7 +253,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                         child: Image(
                           width: 110,
                           image: AssetImage(
-                              activity.imageUrl,
+                            activity.imageUrl,
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -246,10 +261,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                     )
                   ],
                 );
-                  Text(
-                  widget.destination.activities[index].name,
-                );
-                },
+              },
             ),
           )
         ],

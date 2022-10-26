@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../models/destination_model.dart';
 import '../screens/destination_screen.dart';
 
@@ -37,7 +39,7 @@ class DestinationCarousel extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -46,11 +48,12 @@ class DestinationCarousel extends StatelessWidget {
               Destination destination = destinations[index];
               return GestureDetector(
                 onTap: () => Navigator.push(
-                  context, MaterialPageRoute(
-                  builder: (_) => DestinationScreen(
-                    destination: destination,
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => DestinationScreen(
+                      destination: destination,
+                    ),
                   ),
-                ),
                 ),
                 child: Container(
                   margin: const EdgeInsets.all(10),
@@ -112,11 +115,11 @@ class DestinationCarousel extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image(
-                                height: 180,
-                                width: 180,
-                                image: AssetImage(destination.imageUrl),
-                                fit: BoxFit.cover,
-                          ),
+                                  height: 180,
+                                  width: 180,
+                                  image: AssetImage(destination.imageUrl),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Positioned(
@@ -136,7 +139,7 @@ class DestinationCarousel extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         FontAwesomeIcons.locationArrow,
                                         color: Colors.white,
                                         size: 10,
@@ -153,7 +156,7 @@ class DestinationCarousel extends StatelessWidget {
                                 ],
                               ),
                             )
-                        ],
+                          ],
                         ),
                       ),
                     ],
@@ -167,4 +170,3 @@ class DestinationCarousel extends StatelessWidget {
     );
   }
 }
-
